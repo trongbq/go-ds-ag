@@ -13,6 +13,7 @@ type BinaryTreeNode struct {
 }
 
 // Insert value into tree
+// Runs in O(h) time where h = logn in balanced tree
 func Insert(root *BinaryTreeNode, v int) error {
 	if root == nil {
 		root = &BinaryTreeNode{Value: v}
@@ -44,15 +45,16 @@ func Insert(root *BinaryTreeNode, v int) error {
 }
 
 // Search searches through tree to find node contains value v
+// Runs in O(h) time where h = logn in balanced tree
 func Search(root *BinaryTreeNode, v int) *BinaryTreeNode {
-	if root == nil {
-		return nil
+	node := root
+	for node != nil && node.Value != v {
+		switch {
+		case v > node.Value:
+			node = node.Right
+		case v < node.Value:
+			node = node.Left
+		}
 	}
-	if root.Value == v {
-		return root
-	}
-	if v > root.Value {
-		return Search(root.Right, v)
-	}
-	return Search(root.Left, v)
+	return node
 }

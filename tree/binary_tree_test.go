@@ -28,8 +28,15 @@ func TestSearching(t *testing.T) {
 	if err != nil {
 		t.Errorf("Inserting Error: %v", err)
 	}
+	err = Insert(&root, 5)
+	if err != nil {
+		t.Errorf("Inserting Error: %v", err)
+	}
 
-	if node := Search(&root, 3); node == nil {
+	if node := Search(&root, 5); node == nil {
 		t.Error("Can not find existing value")
+	}
+	if node := Search(&root, 1); node != nil {
+		t.Error("Found node not in tree")
 	}
 }
