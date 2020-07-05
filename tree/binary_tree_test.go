@@ -53,6 +53,51 @@ func TestFindMinimum(t *testing.T) {
 	if ma := randArr[0]; mNode != nil && ma != mNode.Value {
 		t.Errorf("Failed to find minimum error")
 	}
+
+	// Min value is root
+	root, err = buildTestingTree(randArr)
+	if err != nil {
+		t.Errorf("Inserting Error: %v", err)
+		return
+	}
+	mNode = FindMinimum(root)
+	if mNode != nil && root.Value != mNode.Value {
+		t.Errorf("Failed to find minimum error")
+	}
+}
+
+func TestDelete(t *testing.T) {
+	root, err := buildTestingTree([]int{5, 6, 2, 3, 9, 8, 1, 7, 4, 13, 11, 14, 12})
+	if err != nil {
+		t.Errorf("Inserting Error: %v", err)
+		return
+	}
+
+	// Original: [[[<empty> 1 <empty>] 2 [<empty> 3 [<empty> 4 <empty>]]] 5 [<empty> 6 [[[<empty> 7 <empty>] 8 <empty>] 9 [[<empty> 11 [<empty> 12 <empty>]] 13 [<empty> 14 <empty>]]]]]
+
+	Delete(root, 1)
+	as := ToString(root)
+	if as != "[[<empty> 2 [<empty> 3 [<empty> 4 <empty>]]] 5 [<empty> 6 [[[<empty> 7 <empty>] 8 <empty>] 9 [[<empty> 11 [<empty> 12 <empty>]] 13 [<empty> 14 <empty>]]]]]" {
+		t.Error("Delete failed no child node")
+	}
+
+	Delete(root, 8)
+	as = ToString(root)
+	if as != "[[<empty> 2 [<empty> 3 [<empty> 4 <empty>]]] 5 [<empty> 6 [[<empty> 7 <empty>] 9 [[<empty> 11 [<empty> 12 <empty>]] 13 [<empty> 14 <empty>]]]]]" {
+		t.Error("Delete failed left node")
+	}
+
+	Delete(root, 3)
+	as = ToString(root)
+	if as != "[[<empty> 2 [<empty> 4 <empty>]] 5 [<empty> 6 [[<empty> 7 <empty>] 9 [[<empty> 11 [<empty> 12 <empty>]] 13 [<empty> 14 <empty>]]]]]" {
+		t.Error("Delete failed right child node")
+	}
+
+	Delete(root, 9)
+	as = ToString(root)
+	if as != "[[<empty> 2 [<empty> 4 <empty>]] 5 [<empty> 6 [[<empty> 7 <empty>] 11 [[<empty> 12 <empty>] 13 [<empty> 14 <empty>]]]]]" {
+		t.Error("Delete failed both child node")
+	}
 }
 
 func buildTestingTree(arr []int) (*BinaryTreeNode, error) {
