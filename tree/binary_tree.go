@@ -104,24 +104,24 @@ func Delete(root *BinaryTreeNode, v int) {
 			n.Parent.Left = nn
 		}
 	}
-	// No children
+	// Case 1: No children
 	if node.Left == nil && node.Right == nil {
 		updateParent(node, nil)
 		return
 	}
-	// If tree has one left child
+	// Case 2: If tree has one left child
 	if node.Left != nil && node.Right == nil {
 		node.Left.Parent = node.Parent
 		updateParent(node, node.Left)
 		return
 	}
-	// If tree has one right child
+	// Case 3: If tree has one right child
 	if node.Right != nil && node.Left == nil {
 		node.Right.Parent = node.Parent
 		updateParent(node, node.Right)
 		return
 	}
-	// Tree has two children
+	// Case 4: Tree has two children
 	// Find smallest value in right subtree in sorted order
 	minNode := FindMinimum(node.Right)
 	// minNode can only have right child, let's link right child to parent of minNode
@@ -136,14 +136,23 @@ func Delete(root *BinaryTreeNode, v int) {
 	minNode.Right = node.Right
 }
 
-func TraverseInOrder(root *BinaryTreeNode) {
+func TraverseInOrder(root *BinaryTreeNode) []int {
+	arr := make([]int, 0)
 	if root == nil {
-		return
+		return arr
 	}
 
-	TraverseInOrder(root.Left)
-	fmt.Printf("%v ", root.Value)
-	TraverseInOrder(root.Right)
+	return traverseInOrderRecursive(root, arr)
+}
+
+func traverseInOrderRecursive(root *BinaryTreeNode, arr []int) []int {
+	if root == nil {
+		return arr
+	}
+	arr = traverseInOrderRecursive(root.Left, arr)
+	arr = append(arr, root.Value)
+	arr = traverseInOrderRecursive(root.Right, arr)
+	return arr
 }
 
 // Display shows root-left-right from top to bottom

@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"fmt"
 	"math/rand"
 	"sort"
 	"testing"
@@ -97,6 +98,23 @@ func TestDelete(t *testing.T) {
 	as = ToString(root)
 	if as != "[[<empty> 2 [<empty> 4 <empty>]] 5 [<empty> 6 [[<empty> 7 <empty>] 11 [[<empty> 12 <empty>] 13 [<empty> 14 <empty>]]]]]" {
 		t.Error("Delete failed both child node")
+	}
+}
+
+func TestTraverseInOrder(t *testing.T) {
+	randArr := randomArray(10)
+	root, err := buildTestingTree(randArr)
+	if err != nil {
+		t.Errorf("Inserting Error: %v", err)
+		return
+	}
+
+	o := TraverseInOrder(root)
+	fmt.Println(o)
+	for i, v := range o {
+		if i+1 != v {
+			t.Error("Error traverse in order")
+		}
 	}
 }
 
