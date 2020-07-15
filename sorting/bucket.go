@@ -4,6 +4,7 @@ package sorting
 func BucketSort(arr []float64) {
 	n := len(arr)
 	b := make(map[int][]float64)
+	// Create a bucket
 	for i := 0; i < n; i++ {
 		idx := int(float64(n) * arr[i])
 		if v, ok := b[idx]; ok == true {
