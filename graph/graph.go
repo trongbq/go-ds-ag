@@ -3,67 +3,67 @@ package graph
 import "fmt"
 
 type EdgeNote struct {
-	y    int
+	val  int
 	next *EdgeNote
 }
 
 type Graph struct {
-	edges    map[int]*EdgeNote
-	degree   map[int]int
-	m        int // number of edges
-	n        int // number of vertices
-	directed bool
+	Edges    map[int]*EdgeNote
+	Degree   map[int]int
+	M        int // number of edges
+	N        int // number of vertices
+	Directed bool
 }
 
-func NewGraph(n int, directed bool) *Graph {
-	return &Graph{
-		edges:    make(map[int]*EdgeNote),
-		degree:   make(map[int]int),
-		m:        0,
-		n:        n,
-		directed: directed,
+func NewGraph(n int, directed bool) Graph {
+	return Graph{
+		Edges:    make(map[int]*EdgeNote),
+		Degree:   make(map[int]int),
+		M:        0,
+		N:        n,
+		Directed: directed,
 	}
 }
 
 func (g *Graph) AddEdge(x int, y int) {
 	g.addEdge(x, y)
 
-	if g.directed == false {
+	if g.Directed == false {
 		g.addEdge(y, x)
 	}
 
-	g.m++
+	g.M++
 }
 
-func (g *Graph) addEdge(x int, y int) {
-	node := EdgeNote{y, nil}
+func (g *Graph) addEdge(u int, v int) {
+	node := EdgeNote{v, nil}
 	// Assign new edge node to beginning of edge list
-	if v, ok := g.edges[x]; ok == true {
-		node.next = v
+	if vertex, ok := g.Edges[u]; ok == true {
+		node.next = vertex
 	}
 
-	g.edges[x] = &node
-	g.degree[x]++
+	g.Edges[u] = &node
+	g.Degree[u]++
 }
 
 func (g Graph) Display() {
-	for k, v := range g.edges {
+	for k, v := range g.Edges {
 		fmt.Printf("%v: ", k)
 		for v != nil {
-			fmt.Printf(" %v", v.y)
+			fmt.Printf(" %v", v.val)
 			v = v.next
 		}
 		fmt.Println("")
 	}
 }
 
-func (g Graph) CheckEdge(x int, y int) bool {
-	if v, ok := g.edges[x]; ok == true {
-		for v != nil {
-			if v.y == y {
+func (g Graph) CheckEdge(u int, v int) bool {
+	if vertex, ok := g.Edges[u]; ok == true {
+		for vertex != nil {
+			if vertex.val == v {
 				return true
 			}
-			v = v.next
+			vertex = vertex.next
 		}
 	}
 	return false

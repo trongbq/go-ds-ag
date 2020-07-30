@@ -14,7 +14,7 @@ func TestBuildGraph(t *testing.T) {
 	g.AddEdge(2, 3)
 	g.AddEdge(4, 3)
 
-	if g.m != 7 {
+	if g.M != 7 {
 		t.Error("Invalid number of edges")
 	}
 
