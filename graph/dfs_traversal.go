@@ -43,4 +43,6 @@ func dfs(g Graph, u int, t *int, parent *map[int]int, records *map[int]Record, s
 	(*t)++
 	r.Out = *t
 	(*records)[u] = r
+
+	(*status)[u] = Processed
 }
