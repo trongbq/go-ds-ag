@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestTraverseUndirectedGraph(t *testing.T) {
+func TestBfsTraverseUndirectedGraph(t *testing.T) {
 	data := []struct {
 		parent int
 		child  int
@@ -42,18 +42,6 @@ func TestFindPathNotConnected(t *testing.T) {
 	if !equal(want, got) {
 		t.Errorf("%v can not link to %v but still got result, want: %v, got: %v", 1, 4, want, got)
 	}
-}
-
-func prepare() Graph {
-	g := NewGraph(6, false)
-	g.AddEdge(1, 5)
-	g.AddEdge(1, 2)
-	g.AddEdge(1, 6)
-	g.AddEdge(2, 3)
-	g.AddEdge(2, 5)
-	g.AddEdge(5, 4)
-	g.AddEdge(4, 3)
-	return g
 }
 
 func equal(a, b []int) bool {

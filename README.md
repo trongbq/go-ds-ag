@@ -15,3 +15,4 @@ Collection of data structures and algorithms implemented in Go
 #### Graph
 1. [Graph adjacency list](graph/graph.go)
 2. [Bread-First search](graph/bfs_traversal.go)
+3. [Deep-First search](graph/dfs_traversal.go)

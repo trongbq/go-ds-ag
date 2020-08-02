@@ -1,29 +1,18 @@
 package graph
 
-const (
-	// Undiscovered denotes vertex which has not been discovered
-	Undiscovered = "UNDISCOVERED"
-	// Discovered denotes vertex which has been discovered but not all its edges
-	Discovered = "DISCOVERED"
-	// Processed denotes vertex which has been processed
-	Processed = "PROCESSED"
-	// Null denotes empty value
-	Null = -1
-)
-
 // Bfs runs bread-first search through undirected graph and produces map parent of vertices
 func Bfs(g Graph, start int) map[int]int {
 	parent := make(map[int]int)
-	status := make([]string, g.N)
+	status := make(map[int]string)
 	var queue []int
 
 	// Initialize data
-	for i := 0; i < g.N; i++ {
+	for i := 1; i <= g.N; i++ {
 		status[i] = Undiscovered
 	}
 
 	queue = enqueue(queue, start)
-	status[start-1] = Discovered
+	status[start] = Discovered
 	parent[start] = Null
 
 	var u int
@@ -31,9 +20,9 @@ func Bfs(g Graph, start int) map[int]int {
 		u, queue = dequeue(queue)
 		v := g.Edges[u] // e is the head of linked list of v's connected vertices
 		for v != nil {
-			if status[v.val-1] == Undiscovered {
+			if status[v.val] == Undiscovered {
 				queue = enqueue(queue, v.val)
-				status[v.val-1] = Discovered
+				status[v.val] = Discovered
 				parent[v.val] = u
 			}
 			v = v.next
