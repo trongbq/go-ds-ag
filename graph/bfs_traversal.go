@@ -32,16 +32,6 @@ func Bfs(g Graph, start int) map[int]int {
 	return parent
 }
 
-// FindPath returns shortest path from x -> y if this path exists
-func FindPath(x int, y int, parent map[int]int) []int {
-	r := findPath(x, y, parent, make([]int, 0))
-	if x == y || (len(r) != 0 && r[0] != x) {
-		// Check if there is a path from x -> y in parent tree
-		return []int{}
-	}
-	return r
-}
-
 func enqueue(q []int, v int) []int {
 	return append(q, v)
 }
@@ -60,11 +50,3 @@ func isEmpty(q []int) bool {
 	return len(q) == 0
 }
 
-func findPath(x int, y int, parent map[int]int, r []int) []int {
-	r = append([]int{y}, r...)
-	// y == Null returns true when x can not go to y or x == y from the beginning
-	if x == y || y == Null {
-		return r
-	}
-	return findPath(x, parent[y], parent, r)
-}

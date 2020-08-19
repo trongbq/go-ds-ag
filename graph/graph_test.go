@@ -49,3 +49,27 @@ func prepare() Graph {
 	g.AddEdge(4, 3)
 	return g
 }
+
+func equal(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if v != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func equal2D(a, b [][]int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if !equal(v, b[i]) {
+			return false
+		}
+	}
+	return true
+}
