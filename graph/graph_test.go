@@ -50,6 +50,37 @@ func prepare() Graph {
 	return g
 }
 
+func prepareDAG() Graph {
+	g := NewGraph(7, true)
+	g.AddEdge(1, 2)
+	g.AddEdge(1, 3)
+	g.AddEdge(2, 3)
+	g.AddEdge(2, 4)
+	g.AddEdge(3, 5)
+	g.AddEdge(3, 6)
+	g.AddEdge(5, 4)
+	g.AddEdge(6, 5)
+	g.AddEdge(7, 1)
+	g.AddEdge(7, 6)
+	return g
+}
+
+func prepareDirectedGraphWithCycle() Graph {
+	g := NewGraph(7, true)
+	g.AddEdge(1, 2)
+	g.AddEdge(1, 3)
+	g.AddEdge(2, 3)
+	g.AddEdge(2, 4)
+	g.AddEdge(3, 5)
+	g.AddEdge(3, 6)
+	g.AddEdge(5, 4)
+	g.AddEdge(5, 2)
+	g.AddEdge(6, 5)
+	g.AddEdge(7, 1)
+	g.AddEdge(7, 6)
+	return g
+}
+
 func equal(a, b []int) bool {
 	if len(a) != len(b) {
 		return false

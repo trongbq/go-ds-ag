@@ -1,11 +1,17 @@
 package graph
 
 const (
+	// TreeEdge is an edge which a parent vertex points to imediate child
 	TreeEdge = "TREE_EDGE"
-	BackEdge = "TREE_EDGE"
-	ForwardEdge = "TREE_EDGE"
-	CrossEdge = "TREE_EDGE"
+	// BackEdge is where a child vertex points back to ancestor
+	BackEdge = "BACK_EDGE"
+	// ForwardEdge is where a vetex points to a descendant vertex
+	ForwardEdge = "FORWARD_EDGE"
+	// CrossEdge is an edge that link two unrelated vertices
+	CrossEdge = "CROSS_EDGE"
 )
+
+// Record records time in and out of a vertex
 type Record struct {
 	In  int
 	Out int
@@ -32,65 +38,6 @@ func Dfs(g Graph, start int) (map[int]int, map[int]Record) {
 	return parent, records
 }
 
-// FindCycleInGraph find any cycles in graph, works similar as in DFS
-func FindCycleInGraph(g Graph, start int) [][]int {
-	parent := make(map[int]int)
-	status := make(map[int]string)
-
-	// Initialize data
-	for i := 1; i <= g.N; i++ {
-		status[i] = Undiscovered
-	}
-
-	parent[start] = Null
-	status[start] = Discovered
-
-	return findCycle(g, start, &parent, &status)
-}
-
-func findCycle(g Graph, u int, parent *map[int]int, status *map[int]string) [][]int {
-	cycles := make([][]int, 0)
-
-	v := g.Edges[u] // v is the head of linked list of u's connected vertices
-	for v != nil {
-		if (*status)[v.val] == Undiscovered {
-			(*status)[v.val] = Discovered
-			(*parent)[v.val] = u
-			cs := findCycle(g, v.val, parent, status)
-			if len(cs) != 0 {
-				cycles = append(cycles, cs...)
-			}
-		}
-		// If v is discovered and either v is not parent of u (edge is tree edge) or v is parent of
-		// u but this is directed graph so there might be two edges in reverse direction
-		if (*status)[v.val] == Discovered && ((*parent)[u] != v.val || g.Directed) {
-			// Found a cycle
-			cycles = append(cycles, FindPath(v.val, u, *parent))
-		}
-		v = v.next
-	}
-	(*status)[u] = Processed
-
-	return cycles
-}
-
-func edgeClassification(u int, v int, status map[int]string, parent map[int]int, record map[int]Record) string {
-	if parent[v] == u {
-		return TreeEdge
-	}
-	if status[v] == Discovered {
-		return BackEdge
-	}
-	if status[v] == Processed && record[v].In > record[u].In {
-		return ForwardEdge
-	}
-	if status[v] == Processed && record[v].In < record[u].In {
-		return CrossEdge
-	}
-
-	return ""
-}
-
 func dfs(g Graph, u int, t *int, parent *map[int]int, records *map[int]Record, status *map[int]string) {
 	(*t)++
 	r := Record{In: *t}
@@ -112,3 +59,19 @@ func dfs(g Graph, u int, t *int, parent *map[int]int, records *map[int]Record, s
 	(*status)[u] = Processed
 }
 
+func classifyEdge(u int, v int, status map[int]string, parent map[int]int, record map[int]Record) string {
+	if parent[v] == u {
+		return TreeEdge
+	}
+	if status[v] == Discovered {
+		return BackEdge
+	}
+	if status[v] == Processed && record[v].In > record[u].In {
+		return ForwardEdge
+	}
+	if status[v] == Processed && record[v].In < record[u].In {
+		return CrossEdge
+	}
+
+	return ""
+}

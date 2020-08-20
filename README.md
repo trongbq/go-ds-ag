@@ -16,5 +16,5 @@ Collection of data structures and algorithms implemented in Go
 1. [Graph adjacency list](graph/graph.go)
 2. [Bread-First search](graph/bfs_traversal.go)
 3. [Deep-First search](graph/dfs_traversal.go)
-  - Find cycles
-
+3. [Find Cycle](graph/find_cycle.go)
+3. [Topological Sorting](graph/topological_sorting.go)
