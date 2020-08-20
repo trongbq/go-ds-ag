@@ -58,6 +58,17 @@ func (g *Graph) addEdge(u int, v int) {
 	g.Degree[u]++
 }
 
+func (g *Graph) addWeightedEdge(u int, v int, w int) {
+	node := EdgeNote{v, nil, w}
+	// Assign new edge node to beginning of edge list
+	if vertex, ok := g.Edges[u]; ok == true {
+		node.next = vertex
+	}
+
+	g.Edges[u] = &node
+	g.Degree[u]++
+}
+
 func (g Graph) Display() {
 	for k, v := range g.Edges {
 		fmt.Printf("%v: ", k)

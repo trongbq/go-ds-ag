@@ -81,6 +81,20 @@ func prepareDirectedGraphWithCycle() Graph {
 	return g
 }
 
+func prepareWeightedGraph() Graph {
+	g := NewGraph(6, true)
+	g.addWeightedEdge(1, 2, 17)
+	g.addWeightedEdge(1, 3, 2)
+	g.addWeightedEdge(2, 3, 1)
+	g.addWeightedEdge(2, 4, 11)
+	g.addWeightedEdge(3, 5, 21)
+	g.addWeightedEdge(3, 6, 2)
+	g.addWeightedEdge(5, 4, 1)
+	g.addWeightedEdge(5, 2, 6)
+	g.addWeightedEdge(6, 5, 3)
+	return g
+}
+
 func equal(a, b []int) bool {
 	if len(a) != len(b) {
 		return false
