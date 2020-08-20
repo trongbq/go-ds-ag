@@ -14,8 +14,9 @@ const (
 )
 
 type EdgeNote struct {
-	val  int
-	next *EdgeNote
+	val    int
+	next   *EdgeNote
+	weight int
 }
 
 type Graph struct {
@@ -47,7 +48,7 @@ func (g *Graph) AddEdge(x int, y int) {
 }
 
 func (g *Graph) addEdge(u int, v int) {
-	node := EdgeNote{v, nil}
+	node := EdgeNote{v, nil, 0}
 	// Assign new edge node to beginning of edge list
 	if vertex, ok := g.Edges[u]; ok == true {
 		node.next = vertex
@@ -98,4 +99,3 @@ func findPath(x int, y int, parent map[int]int, r []int) []int {
 	}
 	return findPath(x, parent[y], parent, r)
 }
-
