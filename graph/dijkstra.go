@@ -27,7 +27,7 @@ func Dijkstra(g Graph, start int) ([]int, map[int]int) {
 			v = v.next
 		}
 
-		// Find next vertex to join minimum spanning tree
+		// Find next shortest vertex to go from `start`
 		u = Null
 		dist := MaxInt
 		for i := 1; i < len(distance); i++ {
