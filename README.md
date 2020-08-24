@@ -20,3 +20,4 @@ Collection of data structures and algorithms implemented in Go
 5. [Topological Sorting](graph/topological_sorting.go)
 6. [Prim](graph/min_spanning_tree.go)
 7. [Dijkstra](graph/dijkstra.go)
+8. [Maximum flow (Ford-Fulkerson)](graph/maximum_flow.go)
