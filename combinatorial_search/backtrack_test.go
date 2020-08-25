@@ -62,3 +62,20 @@ func TestPermutation(t *testing.T) {
 		}
 	}
 }
+
+func TestCountAllPathInGraph(t *testing.T) {
+	g := [][]int{
+		{0, 1, 1, 1, 1, 0},
+		{1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 1, 0, 1},
+		{1, 0, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 1},
+		{0, 1, 1, 1, 1, 0},
+	}
+	want := 7
+	got := CountAllPathInGraph(g, 0, 2)
+
+	if got != want {
+		t.Fatalf("Incorrect CountAllPathInGraph algorithms: got: %v, want: %v", got, want)
+	}
+}

@@ -14,6 +14,13 @@ func Permuation(n int) [][]int {
 	return perm(-1, n, arr)
 }
 
+// CountAllPathInGraph returns number of path that can go from s to t
+func CountAllPathInGraph(g [][]int, s, t int) int {
+	arr := make([]int, len(g))
+	arr[0] = s
+	return countPath(g, 0, t, arr)
+}
+
 func subset(k int, n int, arr []bool, c [2]bool) [][]int {
 	if k == n {
 		temp := make([]int, 0)
@@ -66,4 +73,34 @@ func perm(k, n int, arr []int) [][]int {
 		}
 	}
 	return r
+}
+
+func countPath(g [][]int, k, t int, arr []int) int {
+	if arr[k] == t {
+		return 1
+	}
+
+	// Store memory about all values which is selected from previous operation
+	// This will avoid choosing a circle
+	incl := make([]bool, len(g))
+	for i := 0; i <= k; i++ {
+		incl[arr[i]] = true
+	}
+
+	// Construct all candiates which are connected to vertex k
+	var c []int
+	for i := 0; i < len(g); i++ {
+		if g[arr[k]][i] > 0 && !incl[i] {
+			c = append(c, i)
+		}
+	}
+
+	k++
+	var count int
+	for _, v := range c {
+		arr[k] = v
+		temp := countPath(g, k, t, arr)
+		count += temp
+	}
+	return count
 }
