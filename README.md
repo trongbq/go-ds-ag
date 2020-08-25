@@ -21,3 +21,5 @@ Collection of data structures and algorithms implemented in Go
 6. [Prim](graph/min_spanning_tree.go)
 7. [Dijkstra](graph/dijkstra.go)
 8. [Maximum flow (Ford-Fulkerson)](graph/maximum_flow.go)
+#### Combinatorial Search
+1. [Subset](combinatorial_search/backtrack.go)
