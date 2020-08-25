@@ -23,3 +23,5 @@ Collection of data structures and algorithms implemented in Go
 8. [Maximum flow (Ford-Fulkerson)](graph/maximum_flow.go)
 #### Combinatorial Search
 1. [Subset](combinatorial_search/backtrack.go)
+2. [Permuation](combinatorial_search/backtrack.go)
+3. [Count all paths in graph](combinatorial_search/backtrack.go)
