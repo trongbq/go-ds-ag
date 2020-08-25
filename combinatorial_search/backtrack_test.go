@@ -8,18 +8,18 @@ import (
 func TestSubset(t *testing.T) {
 	want := [][]int{
 		{},
+		{0},
 		{1},
 		{2},
-		{3},
+		{0, 1},
+		{0, 2},
 		{1, 2},
-		{1, 3},
-		{2, 3},
-		{1, 2, 3},
+		{0, 1, 2},
 	}
-	got := Subset(3)
+	got := Subset(2)
 
 	if len(got) != len(want) {
-		t.Errorf("Incorrect subset algorithms: got: %v, want: %v", got, want)
+		t.Fatalf("Incorrect subset algorithms: got: %v, want: %v", got, want)
 	}
 
 	for i := 0; i < len(got); i++ {
@@ -31,6 +31,34 @@ func TestSubset(t *testing.T) {
 		}
 		if !f {
 			t.Fatalf("Incorrect subset algorithms: got: %v, want: %v", got, want)
+		}
+	}
+}
+
+func TestPermutation(t *testing.T) {
+	want := [][]int{
+		{0, 1, 2},
+		{0, 2, 1},
+		{1, 0, 2},
+		{1, 2, 0},
+		{2, 0, 1},
+		{2, 1, 0},
+	}
+	got := Permuation(2)
+
+	if len(got) != len(want) {
+		t.Fatalf("Incorrect permutation algorithms: got: %v, want: %v", got, want)
+	}
+
+	for i := 0; i < len(got); i++ {
+		f := false
+		for j := 0; j < len(want); j++ {
+			if reflect.DeepEqual(got[i], want[j]) {
+				f = true
+			}
+		}
+		if !f {
+			t.Fatalf("Incorrect permutation algorithms: got: %v, want: %v", got, want)
 		}
 	}
 }
