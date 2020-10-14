@@ -1,6 +1,8 @@
-# go-ds-alg
+# go-ds-ag
 Collection of data structures and algorithms implemented in Go
 
+#### Bit Manipulation
+1. [Bit](bit/bit.go)
 #### Sorting
 1. [Selection sort](sorting/selection.go)
 2. [Insertion sort](sorting/insertion.go)
