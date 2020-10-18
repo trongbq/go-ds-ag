@@ -10,3 +10,12 @@ func SwapBit(a, i, j int64) int64 {
 	}
 	return a
 }
+
+func CountBit(a int64) int {
+	var c int
+	for a != 0 {
+		c += int(a & 1)
+		a >>= 1
+	}
+	return c
+}
