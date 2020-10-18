@@ -19,3 +19,23 @@ func CountBit(a int64) int {
 	}
 	return c
 }
+
+// The parity of a binary word is 1 if the number of 1s in the word is odd,
+// otherwise, it is 0
+func Parity(a int64) int {
+	var p int
+	for a != 0 {
+		p ^= int(a & 1)
+		a >>= 1
+	}
+	return p
+}
+
+func ParityOpt(a int64) int {
+	var p int
+	for a != 0 {
+		p ^= 1
+		a &= (a - 1) // Drop lowest 1 bit
+	}
+	return p
+}
