@@ -53,3 +53,39 @@ func TestDivide(t *testing.T) {
 		}
 	}
 }
+
+func TestPower(t *testing.T) {
+	data := []struct {
+		input struct {
+			a uint64
+			b uint64
+		}
+		want uint64
+	}{
+		{
+			input: struct {
+				a uint64
+				b uint64
+			}{
+				a: 4,
+				b: 12,
+			},
+			want: 16777216,
+		},
+		{
+			input: struct {
+				a uint64
+				b uint64
+			}{
+				a: 3,
+				b: 5,
+			},
+			want: 243,
+		},
+	}
+	for _, c := range data {
+		if got := Power(c.input.a, c.input.b); got != c.want {
+			t.Errorf("Power test error for %v^%v: want: %v, got: %v", c.input.a, c.input.b, c.want, got)
+		}
+	}
+}

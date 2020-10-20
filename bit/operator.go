@@ -49,3 +49,20 @@ func Divide(a, b uint64) uint64 {
 	}
 	return quotient
 }
+
+// if b is even then a^b = a^(b/2)^2 = a^(b/4)^2^2 = ...
+// if b is odd then a^b = a * a^(b-1)
+func Power(a, b uint64) uint64 {
+	p := uint64(1)
+	for b != 0 {
+		if (b & 1) == 1 {
+			// two cases
+			// 1. when b is an odd number (on each iteration)
+			// 2. when b reaches to 1
+			p *= a
+		}
+		a *= a
+		b >>= 1
+	}
+	return p
+}
