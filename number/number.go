@@ -19,7 +19,10 @@ func Reverse(a int) int {
 	return r
 }
 
-// Palindrome checks if a number is a palindrome
+// Palindrome checks if a number is a palindrome.
+// Algorithm tries to compare most significant digit to least significant digit
+// and truncate both two digit each round.
+// Time complexity is O(n) and space complexity is O(1).
 func Palindrome(a int) bool {
 	if a < 0 {
 		return false
